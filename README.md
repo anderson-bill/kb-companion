@@ -1,0 +1,2 @@
+# kb-companion
+Kibana Companion
