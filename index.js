@@ -15,10 +15,36 @@ https.createServer({
 
 console.log('App running at https://localhost:8443');
 
+var elasticsearch = require('elasticsearch');
+var client = new elasticsearch.Client({
+  host: 'https://admin:admin@localhost:9200',
+  log: 'trace'
+});
+
+client.ping({
+  // ping usually has a 3000ms timeout
+  requestTimeout: 1000
+}, function (error) {
+  if (error) {
+    console.trace('elasticsearch cluster is down!');
+  } else {
+    // console.log('All is well');
+  }
+});
+
 app.get('/', function (req, res) {
 
-   res.header('Content-type', 'text/html');
-   return res.render('index', { title: 'Hey Hey Hey!', message: 'Yo Yo'});
+  var cluster_state = client.cluster.state({
+    metric: 'metadata',
+    index: req.params.name
+  }).then(function (response) {
+    console.log(response);
+    var json = JSON.stringify(response,null,2);
+    res.header('Content-type', 'text/html');
+    return res.render('index', { resbody: json } );
+  });
+  
+
 })
 
 ;
