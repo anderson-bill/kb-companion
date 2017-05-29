@@ -7,5 +7,10 @@ html
     script(src="https://code.jquery.com/jquery-3.1.1.min.js")
   body
     h1 Kibana Companion 
-    p
-    pre= resbody
+    ul
+      - for (var i = 0; i < resbody.length; i++) 
+        ul= resbody[i]
+      
+    
+    
+    
