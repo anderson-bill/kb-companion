@@ -1,5 +1,5 @@
 doctype html
-html(lang="en")
+html
   head
     title Kibana Companion
     link(rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css")
@@ -7,19 +7,10 @@ html(lang="en")
     script(src="https://code.jquery.com/jquery-3.1.1.min.js")
   body
     h1 Kibana Companion 
-    p
-      ul
-        li 
-          a(href='/indices') Indices
-        li
-          a(href='/reporting') Reporting
-        li
-          a(href='/scheduler') Scheduler
-        li
-          a(href='/reporting') Administration
-        li
-          a(href='/monitoring') Monitoring
-
-
+    ul
+      - for (var i = 0; i < resbody.length; i++) 
+        li= resbody[i]
+      
+    
     
     

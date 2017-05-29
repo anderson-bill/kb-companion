@@ -1,7 +1,10 @@
-var fs = require('fs'), https = require('https'), express = require('express'),
-app = express();
+var fs = require('fs'),
+  https = require('https'),
+  express = require('express'),
+  app = express();
 
-app.use(express.static('public')); app.set('view engine', 'pug');
+app.use(express.static('public'));
+app.set('view engine', 'pug');
 app.locals.pretty = true;
 
 https.createServer({
@@ -11,9 +14,10 @@ https.createServer({
 
 console.log('App running at https://localhost:8443');
 
-var elasticsearch = require('elasticsearch'); var client = new
-elasticsearch.Client({
-  host: 'https://admin:admin@localhost:9200', log: 'trace'
+var elasticsearch = require('elasticsearch');
+var client = new elasticsearch.Client({
+  host: 'https://admin:admin@localhost:9200',
+  log: 'trace'
 });
 
 client.ping({
@@ -29,13 +33,20 @@ client.ping({
 
 app.get('/', function (req, res) {
 
+  res.header('Content-type', 'text/html');
+  return res.render('index');
+});
+  
+
+app.get('/indices', function (req, res) {
+
   client.cluster.state({
     metric: 'metadata', index: req.params.name
   }).then(function (response) {
     res.header('Content-type', 'text/html');
-    return res.render('index', { resbody: Object.keys(response.metadata.indices).sort() });
+    return res.render('indices', { resbody: Object.keys(response.metadata.indices).sort() });
   });
-  
+
 
 })
 
