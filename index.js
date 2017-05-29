@@ -33,8 +33,7 @@ app.get('/', function (req, res) {
     metric: 'metadata', index: req.params.name
   }).then(function (response) {
     res.header('Content-type', 'text/html');
-    console.log(Object.keys(response.metadata.indices));
-    return res.render('index', { resbody: Object.keys(response.metadata.indices) });
+    return res.render('index', { resbody: Object.keys(response.metadata.indices).sort() });
   });
   
 
