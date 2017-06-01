@@ -7,9 +7,11 @@ html
     script(src="https://code.jquery.com/jquery-3.1.1.min.js")
   body
     h1 Kibana Companion 
-    ul
-      - for (var i = 0; i < resbody.length; i++) 
-        li= resbody[i]
+      h2 Indicies
+      p
+      ul
+      - for (var i = 0; i < indices.length; i++) 
+        li= indices[i]
       
     
     
