@@ -13,3 +13,4 @@ Dependencies
 + Express.js
 + Pug
 + Elasticsearch.js
++ YAML.js
